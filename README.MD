@@ -69,3 +69,6 @@ The data and code supporting the findings of this research are permanently archi
 2.  **Processed Data (Dataset):** The stable, processed datasets (`part_1.csv`, `part_2.csv`) essential for reproducing the results are archived separately.
     * **DOI:** 10.5281/zenodo.17680585
     * **Link:** https://doi.org/10.5281/zenodo.17680585
+
+## License
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
