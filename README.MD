@@ -12,16 +12,25 @@ The code is organized into the `src/` package to separate execution scripts from
 
 | File/Module | Location | Functionality Implemented |
 | :--- | :--- | :--- |
-| **`config.yaml`** | `PROJECT/` | **Primary Configuration.** Stores all hyperparameters (epochs, learning rates), graph settings (K-neighbors), feature lists, and file paths. |
-| **`Data Preprocessing and EDA.ipynb`** | `PROJECT/` | **Data Pipeline Source.** Contains the original steps to clean, normalize, and generate the final stable splits (`part_1.csv`, `part_2.csv`). |
-| **`src/graph_formulation.py`** | `src/` | **Graph Generation Script.** Orchestrates data loading and calls graph factory utilities to create daily snapshot datasets (`.pt` files). |
-| **`src/classification.py` / `regression.py`** | `src/` | **Main STGNN Experiments.** Scripts for training and evaluating the core **GRU-SAGE** architecture (`models/temporal_gnn.py`) on their respective tasks. |
-| **`src/ML_baselines.py`** | `src/` | **Traditional Baselines.** Runs time-series cross-validation (TSC-V) using standard models (Random Forest, Gradient Boosting). |
-| **`src/pgt_baselines.py`** | `src/` | **PyG-Temporal Baselines.** Executes benchmarks using wrappers for established recurrent GNN models (DCRNN, GConvGRU, etc.). |
-| **`src/models/temporal_gnn.py`** | `src/models/` | **Custom Architecture.** Defines the core Spatio-Temporal GNN (GRU temporal encoder + GraphSAGE spatial layers). |
-| **`src/utils/graph_knn_factory.py`** | `src/utils/` | **Static Graph Logic.** Functions for calculating geodesic distances and building k-Nearest Neighbor (kNN) graph structures. |
-| **`src/utils/graph_dynamic_factory.py`** | `src/utils/` | **Dynamic Graph Logic.** Functions for calculating daily inter-station feature correlations to create dynamic edge weights. |
-| **`src/utils/pgt_signal_processor.py`** | `src/utils/` | **Signal Conversion.** Converts raw NumPy arrays into `pytorch_geometric_temporal` signal objects required by the baseline models. |
+| **`__init__.py`** | `src/` | Package initializer. Allows Python to treat `src/` and its submodules (`models`, `utils`) as importable packages. |
+| **`config.yaml`** | `PROJECT/` | **Primary configuration file.** Stores paths, hyperparameters, graph settings (e.g., K-neighbors), and feature definitions used across all experiments. |
+| **`classification.py`** | `src/` | **Main GNN classification pipeline.** Loads dynamic graph data, runs GRU–SAGE model training with Focal Loss, and computes classification metrics. |
+| **`regression.py`** | `src/` | **Main GNN regression pipeline.** Loads static/dynamic graph data, trains GRU–SAGE with SmoothL1Loss, and computes MAE/RMSE metrics. |
+| **`graph_formulation.py`** | `src/` | **Graph dataset generator.** Runs preprocessing and invokes utilities to construct and save all static/dynamic PyG datasets as `.pt` files. |
+| **`ml_baselines.py`** | `src/` | **Traditional ML baselines.** Builds lagged tabular datasets and evaluates Random Forest and Gradient Boosting using Time-Series Cross-Validation (TSCV). |
+| **`pgt_baselines.py`** | `src/` | **PyG-Temporal baselines.** Runs benchmark experiments using wrappers of DCRNN, GConvGRU, GCLSTM, and EvolveGCNH implemented in `models/st_gnn_wrappers.py`. |
+| **`stationIndep_rnn.py`** | `src/` | **Station-independent RNN baseline.** Implements a dual-head GRU/LSTM that processes each station’s time series independently for regression and classification tasks. |
+| **`models/GRUSAGE.py`** | `src/models/` | **Temporal GNN model.** Defines the GRU–SAGE architecture used in the main spatio-temporal classification and regression experiments. |
+| **`models/rnn_models.py`** | `src/models/` | **Dual-head RNN architecture.** Implements the `RNNModel` (GRU/LSTM) with separate regression and classification heads. |
+| **`models/st_gnn_wrappers.py`** | `src/models/` | **PyG-Temporal model wrappers.** Wraps canonical `pytorch_geometric_temporal` models (e.g., DCRNN, GConvGRU, GCLSTM, EvolveGCNH) into PyTorch modules for training pipelines. |
+| **`utils/feature_engineering.py`** | `src/utils/` | **Preprocessing utilities.** Implements `load_and_preprocess` for scaling, cyclic time encoding, one-hot encoding, and feature construction. |
+| **`src/utils/graph_knn_factory.py`** | `src/utils/` | Utility function used as a precursor to the file pgt_Signal_processor . |
+| **`src/utils/graph_dynamic_factory.py`** | `src/utils/` | Contains the logic to construct graph dataset variations |
+| **`utils/data_processing.py`** | `src/utils/` | **GNN data utilities.** Includes functions like `prepare_temporal_data` and `custom_collate` for building lagged graph sequences for recurrent GNNs. |
+| **`utils/pgt_signal_processor.py`** | `src/utils/` | **Temporal signal conversion.** Converts feature and edge arrays into `DynamicGraphTemporalSignal` objects for PyG-Temporal models. |
+| **`utils/ml_baselines_eval.py`** | `src/utils/` | **ML evaluation utilities.** Creates lagged tabular datasets and evaluates traditional ML models with TSCV. |
+| **`utils/rnn_data_processor.py`** | `src/utils/` | **Station sequence builder.** Prepares fixed-length input sequences and targets for the station-independent dual-head RNN model. |
+
 
 
 ##  2. Logical Flow and Execution
