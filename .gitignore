@@ -6,5 +6,5 @@ __pycache__/
 .ipynb_checkpoints/
 
 data/datasets/
-data/processed/datasets_variations/
+data/processed/dataset_variations/
 data/raw
