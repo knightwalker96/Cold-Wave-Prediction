@@ -71,4 +71,4 @@ The data and code supporting the findings of this research are permanently archi
     * **Link:** https://doi.org/10.5281/zenodo.17680585
 
 ## License
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License — see the [LICENSE.txt](LICENSE) file for details.
