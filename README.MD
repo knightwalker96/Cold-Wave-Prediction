@@ -48,7 +48,7 @@ All executable scripts must be run using the **Python module system** (`python3 
 
 -----
 
-##  3. Setup and Dependencies
+##  3. Dependencies
 
 ### Environment Setup
 
@@ -58,12 +58,14 @@ All executable scripts must be run using the **Python module system** (`python3 
     pip install -r requirements.txt
     ```
 
-### Data Availability & Zenodo Integration 
+### Data and Code Availability
 
-The **raw** data is not included in this repository due to size constraints but the **final, processed datasets** (`part_1.csv` and `part_2.csv`) required for full reproducibility are permanently archived on **Zenodo**.
+The data and code supporting the findings of this research are permanently archived and publicly accessible on Zenodo under the following Digital Object Identifiers (DOIs):
 
-  * **Processed Data DOI:** **`[INSERT ZENODO DATA DOI HERE]`**
+1.  **Code Repository (Software):** This specific version of the code is archived as software.
+    * **DOI:** 10.5281/zenodo.17681005
+    * **Link:** https://doi.org/10.5281/zenodo.17681005
 
-**To reproduce the results, please download the processed CSV files from the Zenodo link above and place them into the `data/processed/` directory.**
-
-  * **Code DOI:** This entire repository is archived on Zenodo under the DOI: **`[INSERT ZENODO CODE DOI HERE]`**, ensuring the specific version of the code used for the published results is permanently citable.
+2.  **Processed Data (Dataset):** The stable, processed datasets (`part_1.csv`, `part_2.csv`) essential for reproducing the results are archived separately.
+    * **DOI:** 10.5281/zenodo.17680585
+    * **Link:** `https://doi.org/10.5281/zenodo.17680585`
