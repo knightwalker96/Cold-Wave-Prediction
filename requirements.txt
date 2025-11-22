@@ -1,0 +1,9 @@
+numpy
+pandas
+torch
+torch_geometric
+scikit-learn
+pyyaml
+geopandas
+xarray
+geopy

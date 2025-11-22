@@ -1,0 +1,45 @@
+paths:
+  data_processed_dir: data/processed
+  results_dir: results
+  part_1_path: data/datasets/part_1.csv
+  part_2_path: data/datasets/part_2.csv
+  dataset_variations_dir: data/processed/dataset_variations
+
+graph_params:
+  k_small_static: 11         
+  k_large_static: 7
+  k_small_dynamic: 7         
+  k_large_dynamic: 11
+  
+model_params:
+  num_time_steps: 3          
+  horizon: 1
+  hidden_dim: 64             
+  output_dim_regression: 1
+  output_dim_classification: 1
+  dropout_prob_regression: 0.3 
+  dropout_prob_classification: 0.1 
+
+lstm_params:
+  seq_len: 30               
+  hidden_size: 64
+  num_layers: 2
+  pos_weight: 7.50          
+
+training_params:
+  # General
+  learning_rate: 0.001
+  epochs: 500             
+  tscv_splits: 5
+  batch_size_classification: 32
+  batch_size_regression: 16    
+  focal_loss_alpha: 0.5
+  focal_loss_gamma: 2.0
+
+feature_configs:
+  model_features: ['LATITUDE', 'MAX', 'MIN', 'Temperature', 'TAG', 'PRCP', 'IS_AUGMENTED', 'ONI_index', 'cold_wave']
+  classification_normalized_cols: ['MAX', 'MIN', 'Temperature']
+  classification_categorical_cols: ['TAG', 'IS_AUGMENTED']
+  regression_normalized_cols: ['MAX', 'TEMP', 'Temperature']
+  regression_categorical_cols: ['TAG', 'IS_AUGMENTED', 'cold_wave']
+  correlation_features: ['MIN', 'Temperature', 'TAG']
